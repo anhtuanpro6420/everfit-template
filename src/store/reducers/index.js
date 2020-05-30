@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import errorsReducer from 'src/store/reducers/errorsReducer';
-import newsfeedReducer from 'src/store/reducers/newsfeedReducer';
+import postsReducer from 'src/store/reducers/postsReducer';
 
 const rootReducer = combineReducers({
 	errors: errorsReducer,
-	newsfeed: newsfeedReducer
+	newsfeed: postsReducer
 });
 
 export default rootReducer;

@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getPosts } from 'src/store/actions/newsfeedAction';
+import { Link } from 'react-router-dom';
+import { getPosts } from 'src/store/actions/postsAction';
+import Posts from 'src/components/Posts/Posts';
+import ILoading from 'src/assets/images/loading.gif'
 import './Newsfeed.scss';
 
 class Newsfeed extends React.Component {
@@ -13,18 +16,26 @@ class Newsfeed extends React.Component {
 		this.props.getPosts();
 	}
 
+	renderLoadingIcon = () => {
+		return <img src={ILoading} alt="loading" />
+	}
+
 	render() {
+		const {isLoading, posts} = this.props;
 		return (
-			<p>Hahahha Home page already</p>
+			<>
+				<Link to="/todos">Todos</Link>
+				<h1>Newfeeds</h1>
+				{isLoading ? this.renderLoadingIcon() : <Posts data={posts}/>}
+			</>	
 		);
 	}
 }
 
 const mapStateToProps = state => ({
-	success: state.newsfeed.success,
 	errors: state.errors,
 	isLoading: state.newsfeed.isLoading,
-	data: state.newsfeed.data
+	posts: state.newsfeed.data
 });
 
 const mapDispatchToProps = dispatch => {

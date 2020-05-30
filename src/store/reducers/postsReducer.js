@@ -1,7 +1,6 @@
 import { GET_POSTS_REQUEST, GET_POSTS_SUCCESS } from 'src/store/actions/actionTypes';
 
 const initialState = {
-	success: false,
 	error: null,
 	data: null,
 	isLoading: false
@@ -17,7 +16,6 @@ const reducer = (state = initialState, action) => {
 		case GET_POSTS_SUCCESS: {
 			return {
 				...state,
-				success: true,
 				isLoading: false,
 				data: action.payload
 			};
