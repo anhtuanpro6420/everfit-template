@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import './Newsfeed.scss';
+import './Posts.scss';
 import Card from 'src/components/commons/Card/Card';
 
 
@@ -11,12 +12,16 @@ class Newsfeed extends React.Component {
 		this.state = {};
 	}
 
+	handleRedirect = (id) => {
+		this.props.history.push(`/posts/${id}`)
+	}
+
 	renderPosts = (posts) => {
 		let postsRender = null;
 		if (posts && posts.length) {
 			postsRender = (
 				<ul>
-					{posts.map((item, index) => <li key={item.id}><Card item={item}/></li>)}
+					{posts.map((item, index) => <li key={item.id} onClick={() => this.handleRedirect(item.id)}><Card onClick={() => this.handleRedirect(item.id)} item={item}/></li>)}
 				</ul>
 			)
 		}
@@ -37,4 +42,4 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Newsfeed);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Newsfeed));

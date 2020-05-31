@@ -4,7 +4,7 @@ import postsReducer from 'src/store/reducers/postsReducer';
 
 const rootReducer = combineReducers({
 	errors: errorsReducer,
-	newsfeed: postsReducer
+	posts: postsReducer
 });
 
 export default rootReducer;

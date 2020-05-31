@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPosts } from 'src/store/actions/postsAction';
-import Posts from 'src/components/Posts/Posts';
+import Posts from 'src/containers/Newsfeed/Posts/Posts';
 import LoadingIcon from 'src/components/commons/LoadingIcon/LoadingIcon';
 import './Newsfeed.scss';
 
@@ -22,7 +22,7 @@ class Newsfeed extends React.Component {
 			<>
 				<Link to="/todos">Todos</Link>
 				<h1>Newfeeds</h1>
-				{isLoading ? <LoadingIcon /> : <Posts data={posts}/>}
+				{isLoading ? <LoadingIcon /> : <Posts posts={posts}/>}
 			</>	
 		);
 	}
@@ -30,8 +30,8 @@ class Newsfeed extends React.Component {
 
 const mapStateToProps = state => ({
 	errors: state.errors,
-	isLoading: state.newsfeed.isLoading,
-	posts: state.newsfeed.data
+	isLoading: state.posts.isLoading,
+	posts: state.posts.data
 });
 
 const mapDispatchToProps = dispatch => {
