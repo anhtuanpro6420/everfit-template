@@ -40,6 +40,9 @@ class ScheduleColumn extends React.Component {
 						workouts = [...workouts, dragWorkout]
 						schedule[foundColumnIndex].workouts = workouts;
 					}
+				} else {
+					workouts = [dragWorkout]
+					schedule[foundColumnIndex].workouts = workouts;
 				}
 			}
 		}
