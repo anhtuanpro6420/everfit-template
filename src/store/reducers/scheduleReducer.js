@@ -1,4 +1,4 @@
-import { DROP_EXERCISE_SUCCESS } from 'src/store/actions/actionTypes';
+import { DROP_EXERCISE_SUCCESS, SET_SCHEDULE_SUCCESS } from 'src/store/actions/actionTypes';
 import { v4 as uuid } from 'uuid';
 
 
@@ -140,6 +140,13 @@ const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case DROP_EXERCISE_SUCCESS: {
 			updateExerciseHelper(state, action.payload)
+			return {
+				...state,
+				data: action.payload
+			};
+		}
+		case SET_SCHEDULE_SUCCESS: {
+			console.log(action.payload)
 			return {
 				...state,
 				data: action.payload
