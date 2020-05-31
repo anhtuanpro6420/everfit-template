@@ -3,13 +3,14 @@ import './Card.scss';
 
 const Card = (props) => {
 	const {item} = props || {};
-	const {body, title} = item || {};
+	const {name, information, number} = item || {};
 	return (
 		<div className="card">
-		  <div className="card-body">
-			<h4 className="card-title">{title}</h4>
-			<p className="card-text">{body}</p>
-		  </div>
+			<span className="card-title">{name}</span>
+			<div className="card-body">
+				<span className="card-number">{number}x</span>
+				<span className="card-information">{information}</span>
+			</div>
 		</div>
 	)
 }

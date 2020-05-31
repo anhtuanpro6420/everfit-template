@@ -1,0 +1,24 @@
+.schedule-column-wrapper {
+	border-radius: 6px;
+	flex: 1 1 0px;
+	background: #F3F5F8;
+	position: relative;
+	padding: 10px 7px;
+	&:not(:last-child) {
+		margin-right: 10px;
+	}
+	.column-day {
+		position: absolute;
+		top: -20px;
+		font-size: 10px;
+		line-height: 14px;
+		color: #6A7988;
+	}
+	.column-body {
+		.column-date {
+			font-size: 11px;
+			line-height: 15px;
+			color: #728096;
+		}
+	}
+}
