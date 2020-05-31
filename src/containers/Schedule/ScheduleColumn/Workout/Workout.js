@@ -88,8 +88,8 @@ class Workout extends React.PureComponent {
 		this.props.onDragWorkout(e, workout);
 	}
 
-	showModal = () => {
-		this.setState({ isModalVisible: true })
+	showModal = (workout) => {
+		this.setState({ isModalVisible: true, clickedWorkout: workout })
 	}
 
 	closeModal = () => {
@@ -100,10 +100,10 @@ class Workout extends React.PureComponent {
 		this.setState({ [property]: value })
 	}
 
-	handleSubmit = (e, {columnId, workout}) => {
+	handleSubmit = (e, columnId) => {
 		e.preventDefault();
 		const {schedule} = this.props;
-		const {name, information, number} = this.state || {};
+		const {name, information, number, clickedWorkout} = this.state || {};
 		const newExercise = {
 			id: uuid(),
 			name, 
@@ -115,7 +115,7 @@ class Workout extends React.PureComponent {
 			if (foundColumnIndex > -1) {
 				let {workouts} = schedule[foundColumnIndex] || {};
 				if (workouts && workouts.length) {
-					const foundWorkout = workouts.find(work => work.id === workout.id);
+					const foundWorkout = workouts.find(work => work.id === clickedWorkout.id);
 					if (foundWorkout && foundWorkout.exercises && foundWorkout.exercises.length) {
 						foundWorkout.exercises = [...foundWorkout.exercises, newExercise]
 					}
@@ -125,10 +125,10 @@ class Workout extends React.PureComponent {
 		this.setState({ isModalVisible: false })
 	}
 
-	renderFormExercise = ({columnId, workout}) => {
+	renderFormExercise = (columnId) => {
 		const {name, information, number} = this.state || {};
 		return (
-			<form onSubmit={(e) => this.handleSubmit(e, {columnId, workout})}>
+			<form onSubmit={(e) => this.handleSubmit(e, columnId)}>
 				<div className="form-body">
 					<input className="form-item" type="text" placeholder="Name" value={name} onChange={(e) => this.handleChange('name', e.target.value)} />
 					<input className="form-item" type="text" placeholder="Information" value={information} onChange={(e) => this.handleChange('information', e.target.value)} />
@@ -157,8 +157,8 @@ class Workout extends React.PureComponent {
 						</div>
 						<Exercise exercises={exercises} onDragExercise={this.handleDragExercise}/>
 						<div className="adding-container">
-							<img onClick={this.showModal} className="adding-btn" src={IBtnAdd} alt="add exercise"/>
-							{isModalVisible && <Modal title="Add exercise" onClose={this.closeModal}>{this.renderFormExercise({columnId, workout})}</Modal>}
+							<img onClick={() => this.showModal(workout)} className="adding-btn" src={IBtnAdd} alt="add exercise"/>
+							{isModalVisible && <Modal title="Add exercise" onClose={this.closeModal}>{this.renderFormExercise(columnId)}</Modal>}
 						</div>
 					</div>
 				)
