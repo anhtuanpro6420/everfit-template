@@ -8,6 +8,7 @@ import IBtnAdd from 'src/assets/images/btn-add.svg';
 import { dropExercise } from 'src/store/actions/scheduleAction';
 import './Workout.scss';
 import Modal from '../../../../components/commons/Modal/Modal';
+import ExerciseCreate from 'src/containers/Schedule/ScheduleColumn/Workout/ExerciseCreate/ExerciseCreate';
 
 class Workout extends React.PureComponent {
 	constructor(props) {
@@ -127,16 +128,9 @@ class Workout extends React.PureComponent {
 
 	renderFormExercise = (columnId) => {
 		const {name, information, number} = this.state || {};
-		return (
-			<form onSubmit={(e) => this.handleSubmit(e, columnId)}>
-				<div className="form-body">
-					<input className="form-item" type="text" placeholder="Name" value={name} onChange={(e) => this.handleChange('name', e.target.value)} />
-					<input className="form-item" type="text" placeholder="Information" value={information} onChange={(e) => this.handleChange('information', e.target.value)} />
-					<input className="form-item" type="text" placeholder="Number" value={number} onChange={(e) => this.handleChange('number', e.target.value)} />
-					<input className="form-item" type="submit" value="Submit" />
-				</div>
-			</form>
-		)
+		return <ExerciseCreate name={name} information={information} number={number} 
+								onSubmit={(e) => this.handleSubmit(e, columnId)}
+								onChange={this.handleChange}/>
 	}
 
 	renderWorkouts = () => {
