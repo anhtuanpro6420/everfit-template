@@ -19,7 +19,7 @@ class ScheduleColumn extends React.Component {
 					<div className="column-day">{day}</div>
 					<div className="column-body">
 						<span className="column-date">{date}</span>
-						<Workout workouts={workouts} />
+						<Workout workouts={workouts} columnId={id}/>
 					</div>
 				</div>
 		)		

@@ -1,4 +1,4 @@
-import { GET_POSTS_REQUEST, GET_POSTS_SUCCESS } from 'src/store/actions/actionTypes';
+import { DROP_EXERCISE_SUCCESS } from 'src/store/actions/actionTypes';
 import { v4 as uuid } from 'uuid';
 
 
@@ -105,21 +105,43 @@ const initialData = [
 
 const initialState = {
 	error: null,
-	data: initialData,
-	isLoading: false
+	data: initialData
 };
+
+const updateExerciseHelper = (state, payload) => {
+	const {data} = state || {};
+	const {dropColumnId, dropWorkoutId, dragExercise} = payload;
+	console.log(dragExercise)
+	if (data && data.length) {
+		const foundColumn = data.find(item => item.id === dropColumnId);
+		if (foundColumn) {
+			const {workouts} = foundColumn || {};
+			if (workouts && workouts.length) {
+				const foundWorkout = workouts.find(work => work.id === dropWorkoutId);
+				if (foundWorkout) {
+					let {exercises} = foundWorkout || {};
+					if (exercises && exercises.length) {
+						console.log(exercises)
+						console.log(dragExercise)
+						const foundExercise = exercises.find(exercise => exercise.id === dragExercise.id);
+						if (!foundExercise) {
+							exercises = [...exercises, dragExercise];
+						}
+					}
+				}
+			}
+		}
+	}
+	console.log(data)
+	console.log(payload)
+}
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-		case GET_POSTS_REQUEST: {
+		case DROP_EXERCISE_SUCCESS: {
+			updateExerciseHelper(state, action.payload)
 			return {
 				...state,
-				isLoading: true
-			};
-		}
-		case GET_POSTS_SUCCESS: {
-			return {
-				...state,
-				isLoading: false,
 				data: action.payload
 			};
 		}

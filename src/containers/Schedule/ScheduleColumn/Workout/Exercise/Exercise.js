@@ -10,12 +10,16 @@ class Exercise extends React.PureComponent {
 		this.state = {};
 	}
 
+	handleOnDrag = (item) => {
+		this.props.onDragExercise(item)
+	}
+
 	renderExercise = () => {
 		const {exercises} = this.props;
 		let exercisesRender = null;
 		if (exercises && exercises.length) {
 			exercisesRender = exercises.map(item => {
-				return <Card item={item}/>
+				return <Card item={item} onDrag={this.handleOnDrag}/>
 			})
 		}
 		return exercisesRender;
