@@ -11,7 +11,6 @@ class Workout extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
-			dragExercise: null
 		};
 	}
 
@@ -19,21 +18,14 @@ class Workout extends React.PureComponent {
 		event.preventDefault();
 	}
 
-	onDrop = ({dropColumnId, workout}) => {
-		const {dragExercise} = this.state;
-		const {id} = workout;
-		const dropData = {
-			dropColumnId,
-			dropWorkoutId: id,
-			dragExercise
-		}
-		// this.props.onDropExercise(dropData)
+	onDrop = (e, {dropColumnId, workout}) => {
+		const exerciseStr = e.dataTransfer.getData('exercise')
+		const dragExercise = JSON.parse(exerciseStr);
+		console.log(dragExercise)
 	}
 
-	handleDragExercise = (dragExercise) => {
-		this.setState({
-			dragExercise
-		})
+	handleDragExercise = (e, dragExercise) => {
+		e.dataTransfer.setData('exercise', JSON.stringify(dragExercise))
 	}
 
 	handleDragWorkout = (e, workout) => {
@@ -50,7 +42,7 @@ class Workout extends React.PureComponent {
 					<div className="workout-container" 
 						draggable
 						onDragStart={(e) => this.handleDragWorkout(e, workout)} 
-						onDrop={() => this.onDrop({columnId, workout})}
+						onDrop={(e) => this.onDrop(e, {columnId, workout})}
 						onDragOver={(e => this.onDragOver(e))}>
 						<div className="workout-header">
 							<span className="workout-title">{name}</span> <Options />

@@ -10,8 +10,8 @@ class Exercise extends React.PureComponent {
 		this.state = {};
 	}
 
-	handleOnDrag = (item) => {
-		this.props.onDragExercise(item)
+	handleDragExercise = (e, item) => {
+		this.props.onDragExercise(e, item)
 	}
 
 	renderExercise = () => {
@@ -19,7 +19,7 @@ class Exercise extends React.PureComponent {
 		let exercisesRender = null;
 		if (exercises && exercises.length) {
 			exercisesRender = exercises.map(item => {
-				return <Card item={item} onDrag={this.handleOnDrag}/>
+				return <Card item={item} onDrag={this.handleDragExercise}/>
 			})
 		}
 		return exercisesRender;

@@ -5,7 +5,7 @@ const Card = (props) => {
 	const {item, onDrag} = props || {};
 	const {name, information, number} = item || {};
 	return (
-		<div className="card" onDragStart={() => onDrag(item)} draggable="true">
+		<div className="card" onDragStart={(e) => onDrag(e, item)} draggable="true">
 			<span className="card-title">{name}</span>
 			<div className="card-body">
 				<span className="card-number">{number}x</span>

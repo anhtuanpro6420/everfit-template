@@ -17,7 +17,6 @@ class Schedule extends React.Component {
 
 	renderSchedule = () => {
 		const {schedule} = this.props;
-		console.log(schedule)
 		let scheduleRender = null;
 		if (schedule && schedule.length) {
 			scheduleRender = schedule.map(item => {

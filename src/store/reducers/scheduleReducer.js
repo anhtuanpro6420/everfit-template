@@ -109,12 +109,6 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-		case DROP_EXERCISE_SUCCESS: {
-			return {
-				...state,
-				data: action.payload
-			};
-		}
 		case SET_SCHEDULE_SUCCESS: {
 			const newData = [...action.payload]
 			return {
