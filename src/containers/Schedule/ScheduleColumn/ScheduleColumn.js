@@ -64,7 +64,7 @@ class ScheduleColumn extends React.Component {
 	}
 
 	renderScheduleColumn = () => {
-		const {scheduleItem} = this.props || {};
+		const {scheduleItem, schedule} = this.props || {};
 		const {date, day, id: columnId, workouts} = scheduleItem || {};
 		return (
 				<div className="schedule-column-wrapper"
@@ -74,7 +74,7 @@ class ScheduleColumn extends React.Component {
 					<div className="column-day">{day}</div>
 					<div className="column-body">
 						<span className="column-date">{date}</span>
-						<Workout workouts={workouts} columnId={columnId} onDragWorkout={this.handleOnDragWorkout}/>
+						<Workout schedule={schedule} workouts={workouts} columnId={columnId} onDragWorkout={this.handleOnDragWorkout}/>
 					</div>
 				</div>
 		)		

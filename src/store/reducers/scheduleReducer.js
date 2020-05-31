@@ -1,4 +1,4 @@
-import { DROP_EXERCISE_SUCCESS, SET_SCHEDULE_SUCCESS } from 'src/store/actions/actionTypes';
+import { SET_SCHEDULE_SUCCESS } from 'src/store/actions/actionTypes';
 import { v4 as uuid } from 'uuid';
 
 const initialData = [
