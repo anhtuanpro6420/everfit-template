@@ -30,23 +30,24 @@ class ScheduleColumn extends React.Component {
 	}
 
 	addWorkout = (schedule, dragWorkout, dropColumnId) => {
-		if (schedule && schedule.length) {
-			const foundColumnIndex = schedule.findIndex(item => item.id === dropColumnId);
+		const newSchedule = [...schedule];
+		if (newSchedule && newSchedule.length) {
+			const foundColumnIndex = newSchedule.findIndex(item => item.id === dropColumnId);
 			if (foundColumnIndex > -1) {
-				let {workouts} = schedule[foundColumnIndex] || {};
+				let {workouts} = newSchedule[foundColumnIndex] || {};
 				if (workouts && workouts.length) {
 					const foundWorkout = workouts.find(work => work.id === dragWorkout.id);
 					if (!foundWorkout) {
 						workouts = [...workouts, dragWorkout]
-						schedule[foundColumnIndex].workouts = workouts;
+						newSchedule[foundColumnIndex].workouts = workouts;
 					}
 				} else {
 					workouts = [dragWorkout]
-					schedule[foundColumnIndex].workouts = workouts;
+					newSchedule[foundColumnIndex].workouts = workouts;
 				}
 			}
 		}
-		return schedule;
+		return newSchedule;
 	}
 
 	onDrop = (e, dropColumnId) => {
