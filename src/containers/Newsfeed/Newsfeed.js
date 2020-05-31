@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPosts } from 'src/store/actions/postsAction';
 import Posts from 'src/components/Posts/Posts';
-import ILoading from 'src/assets/images/loading.gif'
+import LoadingIcon from 'src/components/commons/LoadingIcon/LoadingIcon';
 import './Newsfeed.scss';
 
 class Newsfeed extends React.Component {
@@ -16,17 +16,13 @@ class Newsfeed extends React.Component {
 		this.props.getPosts();
 	}
 
-	renderLoadingIcon = () => {
-		return <img src={ILoading} alt="loading" />
-	}
-
 	render() {
 		const {isLoading, posts} = this.props;
 		return (
 			<>
 				<Link to="/todos">Todos</Link>
 				<h1>Newfeeds</h1>
-				{isLoading ? this.renderLoadingIcon() : <Posts data={posts}/>}
+				{isLoading ? <LoadingIcon /> : <Posts data={posts}/>}
 			</>	
 		);
 	}
