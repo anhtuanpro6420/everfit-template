@@ -74,7 +74,7 @@ class ScheduleColumn extends React.Component {
 					<div className="column-day">{day}</div>
 					<div className="column-body">
 						<span className="column-date">{date}</span>
-						<Workout schedule={schedule} workouts={workouts} columnId={columnId} onDragWorkout={this.handleOnDragWorkout}/>
+						<Workout schedule={schedule} workouts={workouts} columnId={columnId} onDragWorkout={this.handleOnDragWorkout} onSetSchedule={this.props.onSetSchedule}/>
 					</div>
 				</div>
 		)		
