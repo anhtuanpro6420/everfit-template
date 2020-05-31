@@ -1,124 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { v4 as uuid } from 'uuid';
 import './Schedule.scss';
 import ScheduleColumn from './ScheduleColumn/ScheduleColumn';
-
-const initialData = [
-	{
-		id: uuid(),
-		day: 'MON',
-		date: '05',
-		workouts: []
-	},
-	{
-		id: uuid(),
-		day: 'TUE',
-		date: '06',
-		workouts: [
-			{
-				id: uuid(),
-				name: 'Chest day - with arm',
-				exercises: [
-					{
-						id: uuid(),
-						name: 'Bench Press Med',
-						information: '50 lb x 5, 60 lb x 5, 70',
-						number: 3
-					},
-					{
-						id: uuid(),
-						name: 'Exercise B',
-						information: '40 lb x 10',
-						number: 1
-					}
-				]
-			}
-		]
-	},
-	{
-		id: uuid(),
-		day: 'WED',
-		date: '07',
-		workouts: [
-			{
-				id: uuid(),
-				name: 'Leg Day',
-				exercises: [
-					{
-						id: uuid(),
-						name: 'Exercise C',
-						information: '40 lb x 10',
-						number: 1
-					},
-					{
-						id: uuid(),
-						name: 'Exercise D',
-						information: '40 lb x 10',
-						number: 1
-					},
-					{
-						id: uuid(),
-						name: 'Exercise E',
-						information: '40 lb x 10',
-						number: 1
-					}
-				]
-			},
-			{
-				id: uuid(),
-				name: 'Arm Day',
-				exercises: [
-					{
-						id: uuid(),
-						name: 'Exercise F',
-						information: '40 lb x 10',
-						number: 1
-					}
-				]
-			}
-		]
-	},
-	{
-		id: uuid(),
-		day: 'THU',
-		date: '08',
-		workouts: []
-	},
-	{
-		id: uuid(),
-		day: 'FRI',
-		date: '09',
-		workouts: []
-	},
-	{
-		id: uuid(),
-		day: 'SAT',
-		date: '10',
-		workouts: []
-	},
-	{
-		id: uuid(),
-		day: 'SUN',
-		date: '11',
-		workouts: []
-	},
-];
+import { setSchedule } from 'src/store/actions/scheduleAction'
 
 class Schedule extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			schedule: initialData
 		};
 	}
 
 	handleSetSchedule = schedule => {
-		this.setState({ schedule })
+		this.props.onSetSchedule(schedule)
 	}
 
 	renderSchedule = () => {
-		const {schedule} = this.state;
+		const {schedule} = this.props;
+		console.log(schedule)
 		let scheduleRender = null;
 		if (schedule && schedule.length) {
 			scheduleRender = schedule.map(item => {
@@ -134,11 +33,12 @@ class Schedule extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	// schedule: state.schedule.data
+	schedule: state.schedule.data
 });
 
 const mapDispatchToProps = dispatch => {
 	return {
+		onSetSchedule: schedule => dispatch(setSchedule(schedule))
 	};
 };
 

@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './ScheduleColumn.scss';
 import Workout from 'src/containers/Schedule/ScheduleColumn/Workout/Workout';
-import {setSchedule} from 'src/store/actions/scheduleAction';
-
 
 class ScheduleColumn extends React.Component {
 	constructor(props) {
@@ -18,10 +16,20 @@ class ScheduleColumn extends React.Component {
 		event.preventDefault();
 	}
 
-	onDrop = (e, dropColumnId) => {
-		const {schedule} = this.props;
-		const workoutStr = e.dataTransfer.getData('workout')
-		const dragWorkout = JSON.parse(workoutStr);
+	removeWorkout = (schedule, dragWorkout) => {
+		let removeSchedule;
+		if (schedule && schedule.length) {
+			removeSchedule = schedule.map(item => {
+				if (item.workouts && item.workouts.length) {
+					item.workouts = item.workouts.filter(work => work.id !== dragWorkout.id);
+				}
+				return item;
+			})
+		}
+		return removeSchedule;
+	}
+
+	addWorkout = (schedule, dragWorkout, dropColumnId) => {
 		if (schedule && schedule.length) {
 			const foundColumnIndex = schedule.findIndex(item => item.id === dropColumnId);
 			if (foundColumnIndex > -1) {
@@ -35,7 +43,16 @@ class ScheduleColumn extends React.Component {
 				}
 			}
 		}
-		this.props.onSetSchedule(schedule)
+		return schedule;
+	}
+
+	onDrop = (e, dropColumnId) => {
+		const {schedule} = this.props;
+		const workoutStr = e.dataTransfer.getData('workout')
+		const dragWorkout = JSON.parse(workoutStr);
+		const removeSchedule = this.removeWorkout(schedule, dragWorkout)
+		const newSchedule = this.addWorkout(removeSchedule, dragWorkout, dropColumnId)
+		this.props.onSetSchedule(newSchedule)
 	}
 
 	handleOnDragWorkout = (e, workout) => {
@@ -43,7 +60,6 @@ class ScheduleColumn extends React.Component {
 	}
 
 	renderScheduleColumn = () => {
-		console.log(123)
 		const {scheduleItem} = this.props || {};
 		const {date, day, id: columnId, workouts} = scheduleItem || {};
 		return (
@@ -66,12 +82,10 @@ class ScheduleColumn extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	// schedule: state.schedule.data
 });
 
 const mapDispatchToProps = dispatch => {
 	return {
-		// onSetSchedule: schedule => dispatch(setSchedule(schedule))
 	};
 };
 
