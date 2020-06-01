@@ -20,7 +20,7 @@ class Schedule extends React.Component {
 		let scheduleRender = null;
 		if (schedule && schedule.length) {
 			scheduleRender = schedule.map(item => {
-				return <ScheduleColumn schedule={schedule} scheduleItem={item} onSetSchedule={this.handleSetSchedule}/>
+				return <ScheduleColumn key={item.id} schedule={schedule} scheduleItem={item} onSetSchedule={this.handleSetSchedule}/>
 			})
 		}
 		return scheduleRender;

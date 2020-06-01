@@ -64,10 +64,11 @@ class ScheduleColumn extends React.Component {
 	}
 
 	renderScheduleColumn = () => {
-		const {scheduleItem, schedule} = this.props || {};
+		const {scheduleItem, schedule, key} = this.props || {};
 		const {date, day, id: columnId, workouts} = scheduleItem || {};
 		return (
-				<div className="schedule-column-wrapper"
+				<div key={key} 
+					className="schedule-column-wrapper"
 					onDrop={(e) => this.onDrop(e, columnId)}
 					onDragOver={(e => this.onDragOver(e))}
 				>

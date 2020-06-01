@@ -19,7 +19,7 @@ class Exercise extends React.PureComponent {
 		let exercisesRender = null;
 		if (exercises && exercises.length) {
 			exercisesRender = exercises.map(item => {
-				return <Card item={item} onDrag={this.handleDragExercise}/>
+				return <Card key={item.id} item={item} onDrag={this.handleDragExercise}/>
 			})
 		}
 		return exercisesRender;

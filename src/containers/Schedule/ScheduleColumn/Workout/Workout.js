@@ -142,6 +142,7 @@ class Workout extends React.PureComponent {
 				const {exercises, name} = workout || {};
 				return (
 					<div className="workout-container" 
+						key={workout.id}
 						draggable
 						onDragStart={(e) => this.handleDragWorkout(e, workout)} 
 						onDrop={(e) => this.onDrop(e, {columnId, workout})}
