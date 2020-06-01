@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './ScheduleColumn.scss';
 import Workout from 'src/containers/Schedule/ScheduleColumn/Workout/Workout';
+import { getCurrentDate } from 'src/shared/utils/dateHelper';
 
 class ScheduleColumn extends React.Component {
 	constructor(props) {
@@ -66,6 +67,9 @@ class ScheduleColumn extends React.Component {
 	renderScheduleColumn = () => {
 		const {scheduleItem, schedule, key} = this.props || {};
 		const {date, day, id: columnId, workouts} = scheduleItem || {};
+		const currentDate = getCurrentDate((new Date()).getDate());
+		const isCurrentDate = date === currentDate;
+		const dateClasses = isCurrentDate ? "column-date current-date" : "column-date";
 		return (
 				<div key={key} 
 					className="schedule-column-wrapper"
@@ -74,7 +78,7 @@ class ScheduleColumn extends React.Component {
 				>
 					<div className="column-day">{day}</div>
 					<div className="column-body">
-						<span className="column-date">{date}</span>
+						<span className={dateClasses}>{date}</span>
 						<Workout schedule={schedule} workouts={workouts} columnId={columnId} onDragWorkout={this.handleOnDragWorkout} onSetSchedule={this.props.onSetSchedule}/>
 					</div>
 				</div>

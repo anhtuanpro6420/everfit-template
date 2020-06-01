@@ -1,17 +1,16 @@
 import { SET_SCHEDULE_SUCCESS } from 'src/store/actions/actionTypes';
 import { v4 as uuid } from 'uuid';
+import { getDatesOfWeek } from 'src/shared/utils/dateHelper';
 
 const initialData = [
 	{
 		id: uuid(),
 		day: 'MON',
-		date: '05',
 		workouts: []
 	},
 	{
 		id: uuid(),
 		day: 'TUE',
-		date: '06',
 		workouts: [
 			{
 				id: uuid(),
@@ -36,7 +35,6 @@ const initialData = [
 	{
 		id: uuid(),
 		day: 'WED',
-		date: '07',
 		workouts: [
 			{
 				id: uuid(),
@@ -79,32 +77,37 @@ const initialData = [
 	{
 		id: uuid(),
 		day: 'THU',
-		date: '08',
 		workouts: []
 	},
 	{
 		id: uuid(),
 		day: 'FRI',
-		date: '09',
 		workouts: []
 	},
 	{
 		id: uuid(),
 		day: 'SAT',
-		date: '10',
 		workouts: []
 	},
 	{
 		id: uuid(),
 		day: 'SUN',
-		date: '11',
 		workouts: []
 	},
 ];
 
+const initDates = () => {
+	const dates = getDatesOfWeek();
+	const initialDataWithDates = initialData.map((item, index) => ({
+		...item,
+		date: dates[index].slice(-2)
+	}))
+	return initialDataWithDates;
+}
+
 const initialState = {
 	error: null,
-	data: initialData
+	data: initDates()
 };
 
 const reducer = (state = initialState, action) => {
