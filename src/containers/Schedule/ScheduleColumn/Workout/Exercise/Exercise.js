@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import Card from 'src/components/commons/Card/Card';
 import './Exercise.scss';
 
@@ -30,12 +28,4 @@ class Exercise extends React.PureComponent {
 	}
 }
 
-const mapStateToProps = state => ({
-});
-
-const mapDispatchToProps = dispatch => {
-	return {
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Exercise));
+export default Exercise;

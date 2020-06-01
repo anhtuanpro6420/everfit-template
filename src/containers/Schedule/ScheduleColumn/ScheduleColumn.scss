@@ -1,6 +1,7 @@
 .schedule-column-wrapper {
 	border-radius: 6px;
 	flex: 1 1 0px;
+	min-height: 90vh;
 	&:not(:last-child) {
 		margin-right: 10px;
 	}
@@ -12,10 +13,9 @@
 		margin-bottom: 9px;
 	}
 	.column-body {
-		background: #F3F5F8;
-		min-height: 90vh;
+		background:rgb(243, 245, 248);
+		height: 100%;
 		padding: 10px 7px;
-		opacity: 0.8;
     	border-radius: 6px;
 		.column-date {
 			font-size: 11px;
